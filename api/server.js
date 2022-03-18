@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const PORT = 3131;
-const data = require('../teamSeasonDump.json');
+const data = require('../scraper/teamSeasonDump.json'); // using until DB seed
 
 app.use(express.json());
 
