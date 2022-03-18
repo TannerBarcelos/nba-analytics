@@ -19,10 +19,8 @@ app.get('/api/teams/:teamName', (request, response) => {
   );
   if (formattedTeamName in data) {
     return response.json({
-      data: {
-        teamName: formattedTeamName,
-        stats: data[formattedTeamName],
-      },
+      teamName: formattedTeamName,
+      stats: data[formattedTeamName],
     });
   } else {
     return response.json({ message: 'Team not found' });
