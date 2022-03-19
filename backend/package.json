@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "postinstall": "cd ../frontend && npm run build",
     "devStart": "nodemon server.js",
     "start": "node server.js"
   },
@@ -14,6 +15,7 @@
     "nodemon": "^2.0.15"
   },
   "dependencies": {
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "serve-static": "^1.14.2"
   }
 }

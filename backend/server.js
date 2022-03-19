@@ -1,4 +1,6 @@
 const express = require('express');
+const serveStatic = require('serve-static');
+const path = require('path');
 const app = express();
 const PORT = 3131;
 const data = require('../scraper/teamSeasonDump.json'); // using until DB seed
@@ -26,5 +28,7 @@ app.get('/api/teams/:teamName', (request, response) => {
     return response.json({ message: 'Team not found' });
   }
 });
+
+app.use(serveStatic('../frontend/dist'));
 
 app.listen(PORT || 5000, console.log(`Server listening on port ${PORT}`));
