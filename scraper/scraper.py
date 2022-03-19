@@ -2,18 +2,14 @@ from soup import CreateSoup
 import json
 
 def get_base_links():
-    
     teamMap = {}
-    
     page, soup = getHTML('https://www.basketball-reference.com/teams/')
-    
-    # Perform the request to the base page and find the table of team names + links and pull that out
     table = page.find('table', id='teams_active')
     tableBody = table.find('tbody')
     tableRowData = tableBody.find_all('tr', class_='full_table')
 
-    # get the link to each team page
     for el in tableRowData:
+        print(el)
         element = el.find('a')
         link = f'{soup.get_url()[:len(element) - 8]}{element["href"]}'
         teamName = element.text
