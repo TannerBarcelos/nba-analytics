@@ -1,2 +1,2 @@
-web: python scraper.py
-worker: python scraper.py 
+web: python3 scraper.py
+worker: python3 scraper.py 
