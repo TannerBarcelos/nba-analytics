@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "postinstall": "cd ./frontend && npm run build",
+    "postinstall": "cd frontend && npm run build",
     "devStart": "nodemon server.js",
     "start": "node server.js"
   },
