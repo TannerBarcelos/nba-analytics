@@ -12,7 +12,7 @@ app.get('/api/all', (request, response) => {
 
 //GET single team stats
 app.get('/api/teams/:teamName', (request, response) => {
-  const team_name = request.params.teamName.toLowerCase();
+  const team_name = request.params?.teamName?.toLowerCase();
   const formattedTeamName = team_name.replace(
     /(^\w{1})|(\s+\w{1})/g,
     (letter) => letter.toUpperCase(),
