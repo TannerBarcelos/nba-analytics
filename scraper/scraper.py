@@ -92,6 +92,7 @@ def getHTML(link):
 
 # main method
 def main():
+    print('Scraper started')
     scrapedTeamsAndBaseLinks = get_base_links()
     individualTeamPages, soupedPage = get_team_page(scrapedTeamsAndBaseLinks)
     teamSeasons = process_team_page(individualTeamPages, soupedPage)
