@@ -1,7 +1,8 @@
 const express = require('express');
 const app = express();
-const PORT = 3131;
 const data = require('./scraper/teamSeasonDump.json'); // using until DB seed
+const path = require('path');
+const res = require('express/lib/response');
 
 app.use(express.json());
 
@@ -27,4 +28,15 @@ app.get('/api/teams/:teamName', (request, response) => {
   }
 });
 
-app.listen(PORT || 5000, console.log(`Server listening on port ${PORT}`));
+// Server statis assets in prod
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('frontend/build'));
+  app.get('*', (request, response) => {
+    res.sendFile(path.resolve(__dirname, 'frontend/build', 'index.html'));
+  });
+}
+
+app.listen(
+  process.env.PORT || 3131,
+  console.log(`Server listening on port ${PORT}`),
+);
