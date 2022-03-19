@@ -1,5 +1,7 @@
 # nba-analytics
 
+[Deployed App](https://nbame.herokuapp.com/)
+
 #### Tech Stack
 
 - ReactJS
