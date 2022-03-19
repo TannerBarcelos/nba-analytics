@@ -35,8 +35,5 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.resolve(__dirname, 'frontend/build', 'index.html'));
   });
 }
-
-app.listen(
-  process.env.PORT || 3131,
-  console.log(`Server listening on port ${PORT}`),
-);
+const PORT = process.env.PORT || 3131;
+app.listen(PORT, console.log(`Server listening on port ${PORT}`));

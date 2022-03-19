@@ -1,11 +1,26 @@
+import { useEffect, useState } from 'react';
+import { instance } from './lib/axiosInstance';
 import './App.css';
 
-function App() {
+const App = () => {
+  const [teams, setTeams] = useState(null);
+  useEffect(() => {
+    const getTeams = async () => {
+      const {
+        data: { data },
+      } = await instance.get('/all');
+      setTeams(data);
+    };
+    getTeams();
+  }, []);
   return (
     <div className='App'>
-      <h1>Hello, world</h1>
+      {teams &&
+        Object.keys(teams).map((team, i) => {
+          return <h3 key={i}>{team}</h3>;
+        })}
     </div>
   );
-}
+};
 
 export default App;
