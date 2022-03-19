@@ -3,8 +3,20 @@ const app = express();
 const data = require('./scraper/teamSeasonDump.json'); // using until DB seed
 const path = require('path');
 const res = require('express/lib/response');
+const { PythonShell } = require('python-shell');
+const schedule = require('node-schedule');
 
 app.use(express.json());
+
+// Run scrape every midnight
+schedule.scheduleJob('0 0 * * *', () => {
+  PythonShell.run('./scraper/scraper.py', null, (err) => {
+    if (err) {
+      throw err;
+    }
+    console.log('Latest Team NBA Stats Scraped');
+  });
+});
 
 // GET all team stats
 app.get('/api/all', (request, response) => {
