@@ -9,7 +9,12 @@ const schedule = require('node-schedule');
 app.use(express.json());
 
 // Run scrape every midnight
-schedule.scheduleJob('0 0 * * *', () => {
+const rule = new schedule.RecurrenceRule();
+rule.hour = 2;
+rule.minute = 45;
+rule.tz = 'America/Los_Angeles';
+
+schedule.scheduleJob(rule, () => {
   PythonShell.run('./scraper/scraper.py', null, (err) => {
     if (err) {
       throw err;
