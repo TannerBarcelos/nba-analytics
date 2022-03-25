@@ -4,22 +4,17 @@ const data = require('./scraper/teamSeasonDump.json'); // using until DB seed
 const path = require('path');
 const res = require('express/lib/response');
 const { PythonShell } = require('python-shell');
-const schedule = require('node-schedule');
+const cron = require('node-cron');
 
 app.use(express.json());
 
-// Run scrape every midnight
-const rule = new schedule.RecurrenceRule();
-rule.hour = 2;
-rule.minute = 45;
-rule.tz = 'America/Los_Angeles';
-
-schedule.scheduleJob(rule, () => {
-  PythonShell.run('./scraper/scraper.py', null, (err) => {
+// Run scrape every day at 5am
+cron.schedule('0 0 5 * * *', () => {
+  PythonShell.run('./scraper/scraper.py', null, (err, res) => {
     if (err) {
       throw err;
     }
-    console.log('Latest Team NBA Stats Scraped');
+    console.log('Latest Team NBA Stats Scraped ' + res);
   });
 });
 
