@@ -68,12 +68,14 @@ const Home = () => {
     <div className='container'>
       <div className='top-container'>
         <h1>Current NBA Teams for {currentSeason} season</h1>
-        {generateDropdownSeasonSelector(teams)}
-        <i
-          className={`fa-solid fa-${dark ? 'sun' : 'moon'} theme-toggler ${
-            dark ? 'dark' : ''
-          }`}
-        ></i>
+        <div className='top-container-right'>
+          {generateDropdownSeasonSelector(teams)}
+          <i
+            className={`fa-solid fa-${dark ? 'sun' : 'moon'} theme-toggler ${
+              dark ? 'dark' : ''
+            }`}
+          ></i>
+        </div>
       </div>
       {renderTeams(teams, currentSeason)}
     </div>

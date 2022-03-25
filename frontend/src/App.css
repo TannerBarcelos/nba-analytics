@@ -45,6 +45,20 @@
   padding-top: 2rem;
 }
 
+.top-container-right {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 20%;
+}
+
+.top-container-right select {
+  height: 2rem;
+  width: 15rem;
+  border: 1px solid rgb(196, 196, 196);
+  border-radius: 5px;
+}
+
 .grid-item {
   height: 20rem;
   border: 1px solid #eee;
