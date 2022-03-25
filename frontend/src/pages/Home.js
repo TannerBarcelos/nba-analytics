@@ -70,6 +70,8 @@ const Home = () => {
         <h1>Current NBA Teams for {currentSeason} season</h1>
         <div className='top-container-right'>
           {generateDropdownSeasonSelector(teams)}
+          {/* Placeholder drop down - this will be drop down for all seasons - take the team with the most season stats and use that as the season drop down to avoid out of bounds issues */}
+          {generateDropdownSeasonSelector(teams)}
           <i
             className={`fa-solid fa-${dark ? 'sun' : 'moon'} theme-toggler ${
               dark ? 'dark' : ''
