@@ -20,7 +20,8 @@ cron.schedule('0 0 5 * * *', () => {
 
 // GET all team stats
 app.get('/api/all', (request, response) => {
-  response.json({ data });
+  const { date } = data[Object.keys(data)[0]][0];
+  response.json({ currentSeason: date, statistics: data });
 });
 
 //GET single team stats

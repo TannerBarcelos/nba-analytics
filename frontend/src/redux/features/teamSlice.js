@@ -4,6 +4,7 @@ import { instance } from '../../lib/axiosInstance';
 // Initial State
 const initialState = {
   teams: {},
+  currentSeason: '',
 };
 
 // Async Thunks
@@ -21,8 +22,8 @@ export const teamSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchTeams.fulfilled, (state, action) => {
-      const { data } = action.payload;
-      state.teams = data;
+      state.teams = action.payload.statistics;
+      state.currentSeason = action.payload.currentSeason;
     });
   },
 });
