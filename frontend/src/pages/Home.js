@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 const generateDropdownSeasonSelector = (teams) => {
   const allCurrentTeams = Object.keys(teams);
   const teamsCollection = ['All Teams', ...allCurrentTeams];
+
   return (
     <select>
       {teamsCollection.map((team, idx) => {
@@ -17,26 +18,64 @@ const generateDropdownSeasonSelector = (teams) => {
   );
 };
 
-const renderTeams = (teams) => {
+const renderTeams = (teams, currentSeason) => {
+  const teamsCollection = [];
+  for (const team in teams) {
+    const teamArr = teams[team];
+    const indexOfCurrSeason = teamArr.findIndex(
+      (obj) => obj.date === currentSeason,
+    );
+    if (indexOfCurrSeason >= 0) {
+      const currStats = teamArr[indexOfCurrSeason];
+      const teamStats = {
+        team,
+        stats: currStats,
+      };
+      teamsCollection.push(teamStats);
+      console.log(teamStats);
+    }
+  }
+
   return (
-    <>
-      {Object.keys(teams).map((team) => {
-        return <div key={team}>{team}</div>;
+    <div className='team-container'>
+      {teamsCollection.map(({ team, stats }) => {
+        return (
+          <div key={team} className='grid-item'>
+            <h3>{team}</h3>
+            {/* DISABLED FOR NOW - make regular be solid when selected as favorite */}
+            {/* <i class='fa-regular fa-star star-icon'></i> */}
+            <i className='fa-solid fa-chart-line go-icon'></i>
+            <div className='stats-container'>
+              <img src={stats.logo} alt='Team Logo' />
+              <h4 style={{ padding: '5px' }}>Coach - {stats.stats.coach}</h4>
+              <h5 style={{ padding: '5px' }}>Record - {stats.stats.record}</h5>
+              <h6 style={{ padding: '5px' }}>
+                Points Per Game (PPG) - {stats.stats.ppg}
+              </h6>
+            </div>
+          </div>
+        );
       })}
-    </>
+    </div>
   );
 };
 
 const Home = () => {
+  const [dark, setDark] = useState(false); // move to redux state
+
   const { currentSeason, teams } = useSelector((state) => state.teamsReducer);
   return (
-    <div>
-      <h1>Current NBA Teams</h1>
-      <div>
-        {<h3>Team Statistics for {currentSeason} season</h3>}
+    <div className='container'>
+      <div className='top-container'>
+        <h1>Current NBA Teams for {currentSeason} season</h1>
         {generateDropdownSeasonSelector(teams)}
+        <i
+          className={`fa-solid fa-${dark ? 'sun' : 'moon'} theme-toggler ${
+            dark ? 'dark' : ''
+          }`}
+        ></i>
       </div>
-      {renderTeams(teams)}
+      {renderTeams(teams, currentSeason)}
     </div>
   );
 };
