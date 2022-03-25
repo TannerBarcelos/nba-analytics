@@ -1,7 +1,5 @@
-import React from 'react';
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchTeams } from '../redux/features/teamSlice';
+import { useSelector } from 'react-redux';
 
 const generateDropdownSeasonSelector = (teams) => {
   const allCurrentTeams = Object.keys(teams);
@@ -30,18 +28,15 @@ const renderTeams = (teams) => {
 };
 
 const Home = () => {
-  const data = useSelector((state) => state.teamsReducer);
-  console.log(data);
+  const { currentSeason, teams } = useSelector((state) => state.teamsReducer);
   return (
     <div>
       <h1>Current NBA Teams</h1>
-      {/* {teams && (
-        <div>
-          {<h3>Team Statistics for {season} season</h3>}
-          {generateDropdownSeasonSelector(teams)}
-        </div>
-      )}
-      {teams && renderTeams(teams)} */}
+      <div>
+        {<h3>Team Statistics for {currentSeason} season</h3>}
+        {generateDropdownSeasonSelector(teams)}
+      </div>
+      {renderTeams(teams)}
     </div>
   );
 };
